@@ -1,4 +1,7 @@
 import React from "react";
+import { connect } from "react-redux";
+
+import * as actions from "../../../store/action";
 
 import classes from "./FilterItem.module.css";
 
@@ -15,7 +18,7 @@ const FilterItem = (props) => {
         onChange={(e) => {
           props.changeQueryTypeVal(e.target.value);
         }}
-        value={props.queryTypeValue}
+        value={props.queryTypeVal}
       >
         <option value="1">AND</option>
         <option value="0">OR</option>
@@ -50,10 +53,13 @@ const FilterItem = (props) => {
       <select
         value={props.values.operator}
         onChange={(e) => {
-          props.changeFilterValues({
-            ...props.values,
-            operator: e.target.value,
-          });
+          props.changeFilterValues(
+            {
+              ...props.values,
+              operator: e.target.value,
+            },
+            props.index
+          );
         }}
       >
         <option value=""></option>
@@ -77,10 +83,13 @@ const FilterItem = (props) => {
         <select
           value={props.values.value}
           onChange={(e) => {
-            props.changeFilterValues({
-              ...props.values,
-              value: e.target.value,
-            });
+            props.changeFilterValues(
+              {
+                ...props.values,
+                value: e.target.value,
+              },
+              props.index
+            );
           }}
         >
           <option value=""></option>
@@ -96,10 +105,13 @@ const FilterItem = (props) => {
         <input
           value={props.values.value}
           onChange={(e) => {
-            props.changeFilterValues({
-              ...props.values,
-              value: e.target.value,
-            });
+            props.changeFilterValues(
+              {
+                ...props.values,
+                value: e.target.value,
+              },
+              props.index
+            );
           }}
           type="number"
           placeholder="Value"
@@ -110,10 +122,13 @@ const FilterItem = (props) => {
         <input
           value={props.values.value}
           onChange={(e) => {
-            props.changeFilterValues({
-              ...props.values,
-              value: e.target.value,
-            });
+            props.changeFilterValues(
+              {
+                ...props.values,
+                value: e.target.value,
+              },
+              props.index
+            );
           }}
           placeholder="Value"
         />
@@ -130,10 +145,13 @@ const FilterItem = (props) => {
         <select
           value={props.values.item}
           onChange={(e) => {
-            props.changeFilterValues({
-              ...props.values,
-              item: e.target.value,
-            });
+            props.changeFilterValues(
+              {
+                ...props.values,
+                item: e.target.value,
+              },
+              props.index
+            );
           }}
         >
           <option value=""></option>
@@ -147,11 +165,30 @@ const FilterItem = (props) => {
 
       <div className={classes.Col3}>{operatorPart}</div>
       <div className={classes.Col4}>{valuePart}</div>
-      <div className={classes.DeleteFilter} onClick={props.deleteFilter}>
+      <div
+        className={classes.DeleteFilter}
+        onClick={() => props.deleteFilterQuery(props.key)}
+      >
         <i className="far fa-trash-alt"></i>
       </div>
     </div>
   );
 };
 
-export default FilterItem;
+const mapStateToProps = (state) => {
+  return {
+    queryTypeVal: state.queryTypeVal,
+    filterQueries: state.filterQueries,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    changeQueryTypeVal: (val) => dispatch(actions.changeQueryTypeVal(val)),
+    deleteFilterQuery: (index) => dispatch(actions.deleteFilter(index)),
+    changeFilterValues: (value, index) =>
+      dispatch(actions.changeFilterValues(value, index)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(FilterItem);

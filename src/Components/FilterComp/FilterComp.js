@@ -15,40 +15,22 @@ const FilterComp = (props) => {
           return (
             <FilterItem
               key={index}
+              index={index}
               firstFilter
               values={filterItem}
-              deleteFilter={() => props.deleteFilterQuery(index)}
-              changeFilterValues={(value) =>
-                props.changeFilterValues(value, index)
-              }
             />
           );
         } else if (index == 1) {
           return (
             <FilterItem
               key={index}
+              index={index}
               secondFilter
               values={filterItem}
-              changeQueryTypeVal={(val) => props.changeQueryTypeVal(val)}
-              queryTypeVal={props.queryTypeVal}
-              deleteFilter={() => props.deleteFilterQuery(index)}
-              changeFilterValues={(value) =>
-                props.changeFilterValues(value, index)
-              }
             />
           );
         } else {
-          return (
-            <FilterItem
-              key={index}
-              values={filterItem}
-              queryTypeVal={props.queryTypeVal}
-              deleteFilter={() => props.deleteFilterQuery(index)}
-              changeFilterValues={(value) =>
-                props.changeFilterValues(value, index)
-              }
-            />
-          );
+          return <FilterItem key={index} index={index} values={filterItem} />;
         }
       })}
     </div>
