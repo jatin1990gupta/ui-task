@@ -1,0 +1,11 @@
+.FilterComp {
+  width: 45%;
+  margin: 20px auto;
+  padding: 20px 30px;
+  border: 2px solid #ddd;
+  text-align: left;
+}
+
+.FilterComp .AddFilter {
+  cursor: pointer;
+}

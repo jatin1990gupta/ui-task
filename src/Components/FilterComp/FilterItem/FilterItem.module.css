@@ -1,0 +1,41 @@
+.FilterItem {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.FilterItem select,
+.FilterItem input {
+  height: 30px;
+  width: 90%;
+  margin: 0px 10px;
+}
+
+.FilterItem input {
+  padding: 0px 8px;
+}
+
+.FilterItem .Col1 {
+  width: 16%;
+}
+.FilterItem .Col2,
+.FilterItem .Col3,
+.FilterItem .Col4 {
+  width: 28%;
+}
+
+.FilterItem .Col1 select {
+  width: 60%;
+  margin: 0;
+}
+
+.DeleteFilter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+  width: 30px;
+  border: 1px solid black;
+  margin: 0px 10px;
+  cursor: pointer;
+}
